@@ -86,6 +86,7 @@ class BusinessCard extends Component {
     }
     else {
       const shortHomepage = entry.homepage ? entry.homepage.replace("http://", "").replace("https://", "").replace("www.", "") : ""
+      const routeUrl = 'https://maps.openrouteservice.org/directions?a=null,null,' + entry.lat +","+ entry.lng
       return (
         <EntryDetailPage hasImage={hasImage}>
           <EntryTitle>{entry.title}</EntryTitle>
@@ -127,6 +128,9 @@ class BusinessCard extends Component {
               ? Tags(entry.tags)
               : null)
           ]}</EntryDetailsOtherData>
+          <a href={routeUrl} target="_blank" style={{display: "none"}}>Routenplaner</a>
+          
+
         </EntryDetailPage>)
     }
   }
