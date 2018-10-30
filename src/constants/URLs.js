@@ -32,7 +32,8 @@ module.exports = {
     link: "https://osm.org/copyright"
   },
   OSM_TILES: {
-    link: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+    //link: "https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.png"
+    link: "https://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png"
   },
   DONATE: {
     name: "www.betterplace.org/de/projects/36213",
