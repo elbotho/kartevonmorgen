@@ -138,19 +138,6 @@ class KVMMap extends Component {
             );
           }
         } else {
-          // to make clicking the circle easier add a larger circle with 0 opacity:
-          markers.push(
-            <CircleMarker
-              onClick   = { () => { onMarkerClick(e.id) }}
-              key       = { e.id + "-overlay"}
-              center    = {{ lat: e.lat, lng: e.lng }}
-              opacity   = { 1 }
-              radius    = { 10 }
-              weight    = { 0 }
-              fillColor = { this.getCategoryColorById(e.categories[0]) }
-              fillOpacity = { 0.0 }
-            />);
-
           if(highlight.indexOf(e.id) == 0 || highlight.length == 0){
             markers.push(
               <CircleMarker
@@ -158,7 +145,7 @@ class KVMMap extends Component {
                 key       = { e.id }
                 center    = {{ lat: e.lat, lng: e.lng }}
                 opacity   = { 1 }
-                radius    = { 5 }
+                radius    = { 12 }
                 color     = { "#555" }
                 weight    = { 0.7 }
                 fillColor = { this.getCategoryColorById(e.categories[0]) }
@@ -171,11 +158,11 @@ class KVMMap extends Component {
                 key       = { e.id }
                 center    = {{ lat: e.lat, lng: e.lng }}
                 opacity   = { 1 }
-                radius    = { 5 }
-                color     = { "#555" }
+                radius    = { 8 }
+                color     = { "#fff" }
                 weight    = { 0.7 }
                 fillColor = { this.getCategoryColorById(e.categories[0]) }
-                fillOpacity = { 0.5 }
+                fillOpacity = { 0.6 }
               />);
           }
         }
@@ -187,8 +174,8 @@ class KVMMap extends Component {
               key       = { e.id + "-highlight"}
               center    = {{ lat: e.lat, lng: e.lng }}
               opacity   = { 1 }
-              radius    = { 5.5 }
-              color     = { "#000" }
+              radius    = { 13 }
+              color     = { "#fff" }
               fillColor = { this.getCategoryColorById(e.categories[0]) }
               weight    = { 2.5 }
               fillOpacity = { 1 }
