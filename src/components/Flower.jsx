@@ -1,6 +1,5 @@
 import Flower from "react-vm-flower";
 import React  from "react";
-import styled from "styled-components";
 import { rating_groups } from "../rating";
 
 const flower_scales = (ratings=[]) => {
@@ -8,7 +7,7 @@ const flower_scales = (ratings=[]) => {
   const groups = rating_groups(ratings);
   Object.keys(groups).forEach(g => {
     const rtngs = groups[g];
-    if (rtngs && rtngs.length > 0) { 
+    if (rtngs && rtngs.length > 0) {
       const av = rtngs.reduce((acc, r) => {return acc+r.value;}, 0) / rtngs.length;
       const scale = 0.233 * av + 0.533;
       switch (g) {
