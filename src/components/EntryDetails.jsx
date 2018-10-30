@@ -29,6 +29,7 @@ const Tag = styled.li `
   padding-left:  0.4em;
   padding-right: 0.4em;
   font-size:     0.9em;
+  margin-bottom: 0.3em;
 `;
 
 const Tags = (tags=[]) =>
@@ -67,7 +68,7 @@ const EntryDescription = styled.p`
 `;
 
 const EntryDetailsOtherData = styled.div`
-  font-family: Museo;
+  font-family: Rubik;
 `;
 
 const LoadingEntryMessage = styled.div`

@@ -34,7 +34,7 @@ const ResultListElement = ({highlight, entry, ratings, onClick, onMouseEnter, on
             </span>
           </div>
           <div>
-            <span className="title">{entry.title}</span>
+            <h3 className="title">{entry.title}</h3>
           </div>
           <div>
             <span className= "subtitle">{entry.description}</span>

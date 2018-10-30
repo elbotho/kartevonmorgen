@@ -213,8 +213,9 @@ class KVMMap extends Component {
         ref         = 'map'
         center      = { center }
         zoom        = { zoom   }
-        zoomSnap    = { 0.0 }
-        zoomControl = { false }
+        zoomSnap    = { 1.0 }
+        // zoomStep    = "1"
+        zoomControl = { true }
         className   = "map"
         onMoveend   = { (e) => { onMoveend(this.getMapCoordinates()) }}
         onZoomend   = { (e) => { onZoomend(this.getMapCoordinates()) }}
@@ -222,6 +223,7 @@ class KVMMap extends Component {
 
           <TileLayer
             url = { URLs.OSM_TILES.link }
+            minZoom ='10'
             attribution = {
               '&copy; <a class="osm attr" href=' +
                URLs.OSM_ATTR.link + '>' + URLs.OSM_ATTR.name + '</a>' } >
