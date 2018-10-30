@@ -48,7 +48,7 @@ const RatingsWrapper = styled.div `
 `
 
 const AdditionalRatingButtonWrapper = styled.div `
-  margin-top: 70px;
+  text-align: right;
   height: 20px;
   font-size: 0.8em;
 `
@@ -65,7 +65,6 @@ const FirstRatingButton = styled.button`
 
 const RatingsHeading = styled.h4`
   border-bottom: 1px solid #aaa;
-  margin-top: 40px;
 `
 
 const RatingList = styled.ul`
@@ -103,10 +102,8 @@ const RatingCount = styled.span`
 `
 
 const FlowerWrapper = styled.div `
-  margin-top: 0px;
-  float: right;
-  position: relative;
-  top: -70px;
+  margin-top: 1em;
+  text-align: center;
 `
 
 const RatingContextWrapper = styled.div`
@@ -163,16 +160,16 @@ class Ratings extends Component {
     if(entry){
       return(
         <RatingsWrapper>
+          <FlowerWrapper>
+          {Flower(ratings,55)}
+          </FlowerWrapper>
+          <RatingsHeading>{t("heading")}</RatingsHeading>
           <AdditionalRatingButtonWrapper>
             { entry.ratings && entry.ratings.length > 0
               ? <AdditionalRatingButton onClick={() => { onRate(entry.id) }}>{t("newRating")}</AdditionalRatingButton>
               : ""
             }
           </AdditionalRatingButtonWrapper>
-          <FlowerWrapper>
-          {Flower(ratings,40)}
-          </FlowerWrapper>
-          <RatingsHeading>{t("heading")}</RatingsHeading>
           { entry.ratings && entry.ratings.length > 0
             ? <div>
                 { ratingElements }
