@@ -146,7 +146,7 @@ class KVMMap extends Component {
                 center    = {{ lat: e.lat, lng: e.lng }}
                 opacity   = { 1 }
                 radius    = { 12 }
-                color     = { "#555" }
+                color     = { "#fff" }
                 weight    = { 0.7 }
                 fillColor = { this.getCategoryColorById(e.categories[0]) }
                 fillOpacity = { 1.0 }
