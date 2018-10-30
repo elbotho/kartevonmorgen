@@ -2,7 +2,8 @@
 if (!window.location.origin) {
   window.location.origin = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port: '');
 }
-const URL = location.origin + "/api";
+// const URL = location.origin + "/api";
+const URL = "http://api.ofdb.io:80/v0/"; //use remote api
 
 const NOMINATIM_URL = "https://nominatim.openstreetmap.org";
 const TILEHOSTING_URL = "https://geocoder.tilehosting.com/q/<query>.js?key=<key>";
