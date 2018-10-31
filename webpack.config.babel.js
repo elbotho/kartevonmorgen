@@ -16,7 +16,7 @@ const config = {
     map_widget: ['babel-polyfill', path.join(__dirname, "src/widgets/map/index.js")]
   },
   output: {
-    path: path.join(__dirname, 'dist/'),
+    path: path.join(__dirname, 'docs/'),
     filename: "[name].js"
   },
   devServer: {
