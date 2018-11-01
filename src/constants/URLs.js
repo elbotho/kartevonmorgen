@@ -1,3 +1,8 @@
+// for Internet Explorer:
+if (!window.location.origin) {
+  window.location.origin = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port: '');
+}
+
 module.exports = {
   CC_LICENSE: {
     name: "creativecommons.org/publicdomain/zero/1.0/deed.de",
@@ -32,8 +37,21 @@ module.exports = {
     link: "https://osm.org/copyright"
   },
   OSM_TILES: {
-    //link: "https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.png"
-    link: "https://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png"
+    link: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+  },
+  OFDB_API: {
+    //link: window.location.origin + "/api"
+    link: window.location.protocol + "//" + "api.ofdb.io/v0" //use this for remote api
+  },
+  TH_GEOCODER: {
+    link: "https://geocoder.tilehosting.com/q/<query>.js?key=<key>"
+  },
+  NOMINATIM: {
+    link: "https://nominatim.openstreetmap.org"
+  },
+  ROUTEPLANNER: {
+    name: "Graphhopper Maps",
+    link: "https://graphhopper.com/maps/?point=&point={lat}%2C{lng}&locale=de-DE&vehicle=bike&weighting=fastest&elevation=false&use_miles=false&layer=Omniscale"
   },
   DONATE: {
     name: "www.betterplace.org/de/projects/36213",

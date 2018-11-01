@@ -11,6 +11,7 @@ import { EDIT             } from "../constants/Form";
 import { translate        } from "react-i18next";
 import T                    from "prop-types";
 import styled               from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Fieldset = styled.fieldset`
   margin-top: 10px !important;
@@ -118,27 +119,27 @@ class Form extends Component {
             <Fieldset>
             <div className= "pure-g">
               <label className= "pure-u-2-24">
-                <i className= "fa fa-map-marker" />
-              </label>
-              <div className= "pure-u-22-24 pure-g">
-                <div className= "pure-u-11-24">
-                  <Field name="lat" className="pure-input-1" component="input" readOnly={true}/>
-                  <Field name="lat" component={errorMessage} />
-                </div>
-                <div className= "pure-u-2-24"></div>
-                <div className= "pure-u-11-24">
-                  <Field name="lng" className="pure-input-1" component="input" readOnly={true} />
-                  <Field name="lng" component={errorMessage} />
-                </div>
-              </div>
-            </div>
-          </Fieldset>
+                <FontAwesomeIcon icon="map-marker" />
+                    </label>
+                    <div className= "pure-u-22-24 pure-g">
+                      <div className= "pure-u-11-24">
+                        <Field name="lat" className="pure-input-1" component="input" readOnly={true}/>
+                        <Field name="lat" component={errorMessage} />
+                      </div>
+                      <div className= "pure-u-2-24"></div>
+                      <div className= "pure-u-11-24">
+                        <Field name="lng" className="pure-input-1" component="input" readOnly={true} />
+                        <Field name="lng" component={errorMessage} />
+                      </div>
+                    </div>
+                  </div>
+                </Fieldset>
 
-          <Fieldset>
-            <OptionalLegend>{t("contact")}</OptionalLegend>
-            <div className= "pure-g">
-              <OptionalFieldLabel className= "pure-u-2-24">
-                <i className= "fa fa-globe" />
+                <Fieldset>
+                  <OptionalLegend>{t("contact")}</OptionalLegend>
+                  <div className= "pure-g">
+                    <OptionalFieldLabel className= "pure-u-2-24">
+                      <FontAwesomeIcon icon="globe-africa" />
               </OptionalFieldLabel>
               <div className= "pure-u-22-24">
                 <Field
@@ -152,7 +153,7 @@ class Form extends Component {
 
             <div className= "pure-g">
               <OptionalFieldLabel className= "pure-u-2-24">
-                <i className= "fa fa-envelope" />
+                <FontAwesomeIcon icon="envelope" />
               </OptionalFieldLabel>
               <div className= "pure-u-22-24">
                 <Field name="email" type="email" className="pure-input-1 optional" component="input" placeholder={t("email")} />
@@ -162,7 +163,7 @@ class Form extends Component {
 
             <div className= "pure-g">
               <OptionalFieldLabel className= "pure-u-2-24">
-                <i className= "fa fa-phone" />
+                <FontAwesomeIcon icon="phone" />
               </OptionalFieldLabel>
               <div className= "pure-u-22-24">
                 <Field name="telephone" className="pure-input-1 optional" component="input" placeholder={t("phone")} />
@@ -176,7 +177,7 @@ class Form extends Component {
             <OptionalFieldText>{t("imageUrlExplanation")}</OptionalFieldText>
             <div className= "pure-g">
               <OptionalFieldLabel className= "pure-u-2-24">
-                <i className= "fa fa-camera" />
+                <FontAwesomeIcon icon="camera" />
               </OptionalFieldLabel>
               <div className= "pure-u-22-24">
                 <Field name="image_url" className="pure-input-1 optional" component="input" placeholder={t("imageUrl")} />
@@ -185,7 +186,7 @@ class Form extends Component {
             </div>
             <div className= "pure-g">
               <OptionalFieldLabel className= "pure-u-2-24">
-                <i className= "fa fa-link" />
+                <FontAwesomeIcon icon="link" />
               </OptionalFieldLabel>
               <div className= "pure-u-22-24">
                 <Field name="image_link_url" className="pure-input-1 optional" component="input" placeholder={t("imageLink")} />
@@ -200,7 +201,7 @@ class Form extends Component {
             </legend>
             <div className= "pure-g license">
               <label className= "pure-u-2-24">
-                <i className= "fa fa-creative-commons" />
+                <FontAwesomeIcon icon="creative-commons" />
               </label>
               <div className= "pure-u-2-24 pure-controls">
                 <Field name="license" component="input" type="checkbox" />
@@ -230,7 +231,7 @@ class Form extends Component {
               this.props.dispatch(initialize(EDIT.id, {}, EDIT.fields));
               this.props.dispatch(isEdit ? Actions.cancelEdit() : Actions.cancelNew());
             }}
-            icon = "fa fa-ban"
+            icon = "ban"
             text = { t("cancel") }
           />
           <NavButton
@@ -239,7 +240,7 @@ class Form extends Component {
             onClick = { () => {
               this.props.handleSubmit();
             }}
-            icon = "fa fa-floppy-o"
+            icon = "save"
             text = { t("save") }
           />
         </nav>
