@@ -11,7 +11,7 @@ import Message              from "./Message"
 import CityList             from "./CityList"
 import { EDIT, RATING }     from "../constants/Form"
 import Actions              from "../Actions"
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 class Sidebar extends Component {
   render(){
@@ -171,7 +171,7 @@ class Sidebar extends Component {
           content = (
             <div className={ "content-above-buttons" }>
               <Message
-                iconClass={ "fa fa-spinner fa-pulse" }
+                iconClass={ "spinner" }
                 message={ " lade Daten vom Server ..." }
                 buttonLabel={ t("loading-entries.cancel") }
                 onCancel={ () => { return dispatch(Actions.cancelWait()); }}
@@ -184,7 +184,7 @@ class Sidebar extends Component {
           content = (
             <div className={ "content-above-buttons" }>
               <Message
-                iconClass={ "fa fa-exclamation-triangle" }
+                iconClass={ "exclamation-triangle" }
                 message={ t("io-error.message") }
               />
             </div>

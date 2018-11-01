@@ -23,6 +23,8 @@ import mapConst             from "../constants/Map"
 import { translate }        from "react-i18next"
 import NotificationsSystem  from "reapop";
 import theme                from "reapop-theme-wybo";
+import "./styling/Icons"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const { div, span, button, nav, li, i, a, br, h3, p } = React.DOM;
 
@@ -178,7 +180,7 @@ class Main extends Component {
                   return dispatch(Actions.showLeftPanel());
                 }
               }}>
-              <i className={"fa fa-angle-double-" + (view.showLeftPanel ? 'left' : 'right')}/>
+              <FontAwesomeIcon icon={"angle-double-" + (view.showLeftPanel ? 'left' : 'right')} />
             </button>
           </div>   
           
@@ -186,7 +188,7 @@ class Main extends Component {
             <div className="menu-toggle">
               <button onClick={()=>{ return dispatch(Actions.toggleMenu()); }} >
                 <span className="pincloud">
-                  <i className={"fa fa-" + (rightPanelIsOpen ? 'times' : 'bars')} />
+                  <FontAwesomeIcon icon={(rightPanelIsOpen ? 'times' : 'bars')} />
                 </span>
               </button>
             </div>
