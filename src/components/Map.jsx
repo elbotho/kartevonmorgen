@@ -1,6 +1,6 @@
 import "./styling/Map.styl"
 import React, { Component }         from "react"
-import { Map, TileLayer, Marker, CircleMarker, Circle }   from "react-leaflet"
+import { Map, TileLayer, Marker, CircleMarker, Tooltip }   from "react-leaflet"
 import { icons }                    from "vm-leaflet-icons"
 import URLs                         from "../constants/URLs"
 import { pure }                     from "recompose"
@@ -35,6 +35,15 @@ const LocateButton = styled.a `
   height: 30px !important;
   line-height: 30px !important;
 `;
+
+const SmallTooltip = styled(Tooltip)`
+  > h3 {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    font-size: 0.75rem;
+  }
+`
 
 class KVMMap extends Component {
 
@@ -117,76 +126,63 @@ class KVMMap extends Component {
         }
 
         if(e.ratings.length > 0 && avg_rating && avg_rating > 0){
-          if(highlight.indexOf(e.id) == 0 || highlight.length == 0){
-            markers.push(
-              <Marker
-                key       = { e.id }
-                onClick   = { () => { onMarkerClick(e.id) }}
-                position  = {{ lat: e.lat, lng: e.lng }}
-                icon      = { this.getIconById(e.categories[0]) }
-                opacity   = { 1 }
-              />
-            );
-          } else if(highlight.length > 0){
-            markers.push(
-              <Marker
-                key       = { e.id }
-                onClick   = { () => { onMarkerClick(e.id) }}
-                position  = {{ lat: e.lat, lng: e.lng }}
-                icon      = { this.getIconById(e.categories[0]) }
-                opacity   = { 0.5 }
-              />
-            );
-          }
+          let opacity = 0.5;
+          if(highlight.indexOf(e.id) == 0 || highlight.length == 0) opacity = 1;
+          markers.push(
+            <Marker
+              key       = { e.id }
+              onClick   = { () => { onMarkerClick(e.id) }}
+              position  = {{ lat: e.lat, lng: e.lng }}
+              icon      = { this.getIconById(e.categories[0]) }
+              opacity   = { opacity }
+            >
+              <SmallTooltip direction='bottom' offset={[0, 2]}><h3>{e.title}</h3></SmallTooltip>
+            </Marker>
+          );
         } else {
-          if(highlight.indexOf(e.id) == 0 || highlight.length == 0){
-            markers.push(
-              <CircleMarker
-                onClick   = { () => { onMarkerClick(e.id) }}
-                key       = { e.id }
-                center    = {{ lat: e.lat, lng: e.lng }}
-                opacity   = { 1 }
-                radius    = { 12 }
-                color     = { "#fff" }
-                weight    = { 0.7 }
-                fillColor = { this.getCategoryColorById(e.categories[0]) }
-                fillOpacity = { 1.0 }
-              />);
-          } else if(highlight.length > 0){
-            markers.push(
-              <CircleMarker
-                onClick   = { () => { onMarkerClick(e.id) }}
-                key       = { e.id }
-                center    = {{ lat: e.lat, lng: e.lng }}
-                opacity   = { 1 }
-                radius    = { 8 }
-                color     = { "#fff" }
-                weight    = { 0.7 }
-                fillColor = { this.getCategoryColorById(e.categories[0]) }
-                fillOpacity = { 0.6 }
-              />);
-          }
+          // to make clicking the circle easier add a larger circle with 0 opacity:
+
+          let opacity = 0.5;
+          if(highlight.indexOf(e.id) == 0 || highlight.length == 0) opacity = 1;
+
+          markers.push(
+            <CircleMarker
+              onClick   = { () => { onMarkerClick(e.id) }}
+              key       = { e.id }
+              center    = {{ lat: e.lat, lng: e.lng }}
+              opacity   = { 1 }
+              radius    = { 9 }
+              color     = { "#fff" }
+              weight    = { 0.7 }
+              fillColor = { this.getCategoryColorById(e.categories[0]) }
+              fillOpacity = { opacity }
+            >
+              <SmallTooltip direction='bottom' offset={[0, 10]}><h3>{e.title}</h3></SmallTooltip>
+            </CircleMarker>
+          );
         }
 
         if(highlight.length > 0 && highlight.indexOf(e.id) == 0){
+
+          let yOffset = 10
+          if(e.ratings.length > 0 && avg_rating && avg_rating > 0) yOffset = 2
+
           markers.push(
             <CircleMarker
               onClick   = { () => { onMarkerClick(e.id) }}
               key       = { e.id + "-highlight"}
               center    = {{ lat: e.lat, lng: e.lng }}
-              opacity   = { 1 }
-              radius    = { 13 }
-              color     = { "#fff" }
-              fillColor = { this.getCategoryColorById(e.categories[0]) }
-              weight    = { 2.5 }
-              fillOpacity = { 1 }
-            />);
+              opacity   = { 0 }
+              fillOpacity = { 0 }
+            >
+              <SmallTooltip permanent={true} direction='bottom' offset={[0, yOffset]}><h3>{e.title}</h3></SmallTooltip>
+            </CircleMarker>);
         }
       });
     }
 
     return (
-        <div>
+      <div>
         <Map
         style = {{
           height:   "100%",
@@ -237,23 +233,23 @@ class KVMMap extends Component {
             </LocateButtonContainer>
           </div>
           : null }
-        </div>)
-    }
+      </div>)
+  }
 }
 
 KVMMap.propTypes = {
-    entries       : T.array,
-    ratings       : T.object,
-    highlight     : T.array,
-    center        : T.object,
-    zoom          : T.number,
-    marker        : T.object,
-    onClick       : T.func,
-    onMoveend     : T.func,
-    onZoomend     : T.func,
-    onMarkerClick : T.func,
-    onLocate      : T.func,
-    showLocateButton : T.bool
+  entries       : T.array,
+  ratings       : T.object,
+  highlight     : T.array,
+  center        : T.object,
+  zoom          : T.number,
+  marker        : T.object,
+  onClick       : T.func,
+  onMoveend     : T.func,
+  onZoomend     : T.func,
+  onMarkerClick : T.func,
+  onLocate      : T.func,
+  showLocateButton : T.bool
 };
 
 module.exports = pure(KVMMap);
