@@ -1,6 +1,8 @@
 import React from "react";
 import { pure } from "recompose";
 import T from "prop-types";
+import STYLE from "./styling/Variables"
+import styled from "styled-components";
 
 class Message extends React.Component {
 
@@ -29,7 +31,7 @@ class Message extends React.Component {
         </button>
     }
     return (
-      <div className = 'dialog'>
+      <Dialog>
         <div className = "message">
           <i className = { this.props.iconClass } />
           { this.props.message }
@@ -38,7 +40,7 @@ class Message extends React.Component {
           { cancelButton }
           { actionButton }
         </div>
-      </div>
+      </Dialog>
     );
   }
 }
@@ -51,3 +53,15 @@ Message.propTypes = {
 };
 
 module.exports = pure(Message);
+
+
+const Dialog = styled.div `
+  background-color: #fff;
+  padding: 10px;
+  border: 1px solid ${STYLE.lightGray};
+  box-shadow: 0 0 10px;
+  position: relative;
+  top: 20%;
+  margin: auto;
+  max-width: 600px;
+`

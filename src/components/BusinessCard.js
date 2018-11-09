@@ -1,6 +1,6 @@
 import React, { Component }   from "react";
 import styled                 from "styled-components";
-import Colors                 from "./styling/Colors"
+import STYLE                 from "./styling/Variables"
 import { translate }          from "react-i18next";
 import { pure }               from "recompose";
 import Address                from "./AddressLine";
@@ -20,18 +20,18 @@ const LoadingEntryMessage = styled.div`
 `;
 
 const EntryLink = styled.a`
-  color: ${Colors.darkGray};
+  color: ${STYLE.darkGray};
   text-decoration: none;
 `;
 
 const EntryTitle = styled.h3`
-  color:       ${Colors.anthracite};
+  color:       ${STYLE.anthracite};
   margin-bottom: -6px;
   margin-top: 20px;
 `;
 
 const EntryDescription = styled.p`
-  color: ${Colors.darkGray};
+  color: ${STYLE.darkGray};
 `;
 
 const EntryDetailsOtherData = styled.div`
