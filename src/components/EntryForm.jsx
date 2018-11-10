@@ -32,14 +32,16 @@ class Form extends Component {
     super(props);
     
     this.state = {
-      uploadedFileUrl: this.props.imageUrl || ''
+      uploadedFileUrl: this.props.imageUrl || '',
+      uploading: false
     };
   }
 
   onImageDrop(files) {
 
     this.setState({
-      uploadedFile: files[0]
+      uploadedFile: files[0],
+      uploading: true
     });
     this.handleImageUpload(files[0]);
   }
@@ -56,10 +58,14 @@ class Form extends Component {
       .field('file', file);
 
     upload.end((err, response) => {
+      
+      this.setState({
+        uploading: false
+      })
+
       if (err) {
         console.error(err);
       }
-
       if (response.body.secure_url !== '') {
         this.setState({
           uploadedFileUrl: response.body.secure_url
@@ -220,7 +226,8 @@ class Form extends Component {
                         accept="image/jpg,image/png"
                         onDrop={this.onImageDrop.bind(this)}>
                         <p>{t("imageUploadExplanation")}</p>
-                        { (this.state.uploadedFileUrl === '') ? null :
+                        { this.state.uploading ? <p><i className="fa fa-spinner fa-pulse"/></p> : null }
+                        { this.state.uploadedFileUrl === '' ? null :
                           <div>
                             <img className="pure-img" src={this.state.uploadedFileUrl} />
                             <DeleteButtonWrapper>
