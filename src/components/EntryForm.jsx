@@ -12,13 +12,67 @@ import T                    from "prop-types";
 import styled               from "styled-components";
 import SelectTags           from './SelectTags';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Dropzone             from 'react-dropzone';
+import request              from 'superagent';
+
+
+const CLOUDINARY_UPLOAD_PRESET = 'bmroocka';
+const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/transition-muc/upload';
+
+
+const errorMessage = ({meta}) =>
+  meta.error && meta.touched
+    ? <div className="err">{meta.error}</div>
+    : null
+
 
 class Form extends Component {
 
+  constructor(props) {
+    super(props);
+    
+    this.state = {
+      uploadedFileUrl: this.props.imageUrl || ''
+    };
+  }
+
+  onImageDrop(files) {
+
+    this.setState({
+      uploadedFile: files[0]
+    });
+    this.handleImageUpload(files[0]);
+  }
+  
+  removeImage = (event) => {
+    event.preventDefault()
+    this.props.change('image_url', '');
+    this.state.uploadedFileUrl = '';
+    this.props.imageUrl = '';
+  } 
+
+  handleImageUpload(file) {
+    let upload = request.post(CLOUDINARY_UPLOAD_URL)
+      .field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
+      .field('file', file);
+
+    upload.end((err, response) => {
+      if (err) {
+        console.error(err);
+      }
+
+      if (response.body.secure_url !== '') {
+        this.setState({
+          uploadedFileUrl: response.body.secure_url
+        });
+        this.props.change('image_url', response.body.secure_url)
+      }
+    });
+  }
 
   render() {
 
-    const { isEdit, license, dispatch, handleSubmit } = this.props;
+    const { imageUrl, isEdit, license, dispatch, handleSubmit } = this.props;
     var t = (key) => {
       return this.props.t("entryForm." + key);
     };
@@ -95,7 +149,7 @@ class Form extends Component {
               <Field name="street" className="pure-input-1" component="input" placeholder={t("street")}/>
               <Field name="street" component={errorMessage} />
             </Fieldset>
-            <span className="desc">{t("clickOnMap")}</span>
+
             <Fieldset>
               <div className= "pure-g">
                 <label className= "pure-u-2-24">
@@ -154,19 +208,36 @@ class Form extends Component {
 
             <Fieldset>
               <OptionalLegend>{t("entryImage")}</OptionalLegend>
-              <OptionalFieldText>{t("imageUrlExplanation")}</OptionalFieldText>
-              <div className= "pure-g">
+              {/* <OptionalFieldText>{t("imageUrlExplanation")}</OptionalFieldText> */}
+              <div style={{margin: '1rem 0'}} className="pure-g">
                 <OptionalFieldLabel className= "pure-u-2-24">
-                  <FontAwesomeIcon icon="camera" />
+                  <i className= "fa fa-camera" />
                 </OptionalFieldLabel>
                 <div className= "pure-u-22-24">
-                  <Field name="image_url" className="pure-input-1 optional" component="input" placeholder={t("imageUrl")} />
+                  <div>
+                    <div className="FileUpload">
+                      <VMDropzone
+                        multiple={false}
+                        accept="image/jpg,image/png"
+                        onDrop={this.onImageDrop.bind(this)}>
+                        <p>{t("imageUploadExplanation")}</p>
+                        { (this.state.uploadedFileUrl === '') ? null :
+                          <div>
+                            <img className="pure-img" src={this.state.uploadedFileUrl} />
+                            <DeleteButtonWrapper>
+                              <a className="pure-button" onClick={this.removeImage}>{t("DeleteImage")}</a>
+                            </DeleteButtonWrapper>
+                          </div>}
+                      </VMDropzone>
+                    </div>
+                  </div>
+                  <HiddenField props={{ disabled: true }} name="image_url" className="pure-input-1 optional" component="input" placeholder={t("imageUrl")} />
                   <Field name="image_url" component={errorMessage} />
                 </div>
               </div>
               <div className= "pure-g">
                 <OptionalFieldLabel className= "pure-u-2-24">
-                  <FontAwesomeIcon icon="link" />
+                  <i className= "fa fa-link" />
                 </OptionalFieldLabel>
                 <div className= "pure-u-22-24">
                   <Field name="image_link_url" className="pure-input-1 optional" component="input" placeholder={t("imageLink")} />
@@ -229,6 +300,7 @@ class Form extends Component {
 }
 
 Form.propTypes = {
+  imageUrl: T.string,
   isEdit : T.string,
   license: T.string,
   dispatch: T.func,
@@ -281,7 +353,32 @@ const OptionalLegend = styled.legend`
   color: #777 !important;
 `;
 
-const errorMessage = ({meta}) =>
-  meta.error && meta.touched
-    ? <div className="err">{meta.error}</div>
-    : null
+
+const VMDropzone = styled(Dropzone)`
+  cursor: pointer;
+  background-color: #eee;
+  color: #777;
+  border-color: #ccc;
+  padding: 0.7em 0.7em 0.5rem 0.7em;
+  border-radius: 3px !important;
+
+  >p {
+    margin-top: 0;
+  }
+`
+
+const HiddenField = styled(Field)`
+  display:none !important;
+`
+
+const PreviewImage = styled.img`
+  /* margin-bottom: 0.5rem */
+`
+
+const DeleteButtonWrapper = styled.div `
+  margin-top: 0.5rem;
+  text-align: right;
+  >a {
+    font-size: 80%;
+  }
+`

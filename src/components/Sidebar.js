@@ -118,8 +118,9 @@ class Sidebar extends Component {
         content = (
           <div className="content-above-buttons">
             <EntryForm
-              ref={ form}
+              ref={ form }
               isEdit={ form[EDIT.id] ? form[EDIT.id].kvm_flag_id : null}
+              imageUrl={ entries[search.current].image_url }
               license={ entries[search.current] ? entries[search.current].license : null}
               dispatch={ dispatch }
               onSubmit={ data => {

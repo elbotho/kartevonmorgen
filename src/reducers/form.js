@@ -25,7 +25,8 @@ const reducer = formReducer.plugin({
             ...action.payload,
             license: null,
             tags: (action.payload.tags || []).join(','),
-            category: action.payload.categories[0]
+            category: action.payload.categories[0],
+            image_url: action.payload.image_url
           },
           kvm_flag_id: action.payload.id
         }
