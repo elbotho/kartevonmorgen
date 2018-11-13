@@ -88,7 +88,7 @@ const RatingContextHeading = styled.h5`
 `
 
 const RatingCommentList = styled.ul`
-  margin-left: 1.2em;
+  margin-left: 0;
   margin-top: 0.5em;
   margin-bottom: 0.5em;
   list-style: none;
@@ -161,7 +161,7 @@ class Ratings extends Component {
       return(
         <RatingsWrapper>
           <FlowerWrapper>
-            <Flower ratings={ratings} radius={40} />
+            <Flower ratings={ratings} radius={60} />
           </FlowerWrapper>
           <RatingsHeading>{t("heading")}</RatingsHeading>
           <AdditionalRatingButtonWrapper>
@@ -188,9 +188,9 @@ class Ratings extends Component {
 }
 
 const Comment = (comment) =>
-  <div className="comment">
+  <RatingComment className="comment">
     {comment.text}
-  </div>
+  </RatingComment>
 
 const RatingWrapper = styled.div`
   font-size: 0.9em;
@@ -208,7 +208,10 @@ const RatingTitleWrapper = styled.div`
 
 const SourceWrapper = styled.div`
   color: #AAA;
-  text-align: right;
+`
+
+const RatingComment = styled.div`
+
 `
 
 const rating_value_key = (value) => {

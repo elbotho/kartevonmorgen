@@ -175,11 +175,13 @@ const MainCategories = styled.div `
 `
 
 const SearchInput = styled.input `
+  border: 1px solid rgba(0,0,0,0.1) !important;
+  border-radius: 0px !important;
+  padding: .8em 0 .7em 2em;
+
   ::placeholder{
     color: #bbb;
   }
-  border: 1px solid rgba(0,0,0,0.1) !important;
-  border-radius: 0px !important;
 `;
 
 
@@ -212,7 +214,7 @@ const Bar = styled.div `
     font-size: 1.2em;
   }
 
-  input {
+  > input {
     padding: 0.4em;
     padding-left:  2em;
   }
@@ -226,9 +228,10 @@ const Bar = styled.div `
 
   .search-icon{
     display: inline-block;
-    padding-top: 0.4em;
-    left: 0.6em;
+    padding-top: .9em;
+    left: .75em;
     font-size: 1.2rem;
+    
   }
 
   .locate-icon{

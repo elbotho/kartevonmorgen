@@ -83,7 +83,10 @@ class BusinessCard extends Component {
                 <div key="addr" className="address pure-g">
                   <FontAwesomeIcon className="pure-u-2-24" icon="map-marker-alt" />
                   <div className="pure-u-22-24">
-                    <AddressLine { ...entry } />
+                    <AddressLine 
+                    { ...entry }
+                    className = "icon"
+                    />
                   </div>
                 </div>
                 <div key="route">
@@ -121,6 +124,10 @@ const LoadingEntryMessage = styled.div`
   padding: 1.5em;
 `;
 
+const MyAddressLine = styled(AddressLine)`
+  color: red !important;
+`;
+
 const EntryLink = styled.a`
   color: ${STYLE.darkGray};
   text-decoration: none;
@@ -132,6 +139,7 @@ const EntryLink = styled.a`
 
 const EntryTitle = styled.h3`
   color:       ${STYLE.anthracite};
+  font-size: 1.3rem;
   margin-bottom: -6px;
   margin-top: 20px;
 `;
@@ -141,7 +149,19 @@ const EntryDescription = styled.p`
 `;
 
 const EntryDetailsOtherData = styled.div`
-  font-family: ${STYLE.headerFont};
+  line-height: 1.4;
+
+  .icon{
+    width: 100%;
+    margin-left: .52rem;
+    span {
+      margin-right: 0.3em;
+    
+      &.delimiter {
+        margin-left: -0.3em;
+      }
+    }   
+  }
 `;
 
 const TagsWrapper = styled.div `

@@ -20,8 +20,8 @@ const rating_contexts = {
   "default": gray
 }
 
-const bodyFont= `"Museo", sans-serif`;
-const headerFont= `"Museo", sans-serif`;
+const bodyFont= `"Rubik", sans-serif`;
+const headerFont= `"Rubik", sans-serif`;
 
 
 module.exports = {
@@ -34,6 +34,7 @@ module.exports = {
   coal:       coal,
   anthracite: anthracite,
   lightGray:  lightGray,
+  gray:       gray,
   darkGray:   darkGray,
 
   company:    blue,

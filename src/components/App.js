@@ -602,12 +602,13 @@ const StyledApp = styled.div `
     }
   }
 
-  input, select, textarea, button {
+  .main, input, select, textarea, button {
     font-family: ${STYLE.bodyFont};
   }
 
   h1, h2, h3, h4, h5, h6, h7 {
     font-family: ${STYLE.headerFont};
+    font-weight: 500;
   }
 
   button {
@@ -766,7 +767,7 @@ const StyledApp = styled.div `
       font-style: italic;
     }
     .title {
-      font-weight: bold;
+      margin-bottom: 0.5em
     }
   }
   .optional::placeholder {
@@ -774,7 +775,7 @@ const StyledApp = styled.div `
   }
   input, textarea, select {
     box-shadow: none !important;
-    border-radius: 3px !important;
+    border-radius: 3px;
   }
   .info {
     .landing-img {

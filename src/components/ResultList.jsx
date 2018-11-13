@@ -32,7 +32,7 @@ const ResultListElement = ({highlight, entry, ratings, onClick, onMouseEnter, on
             </span>
           </div>
           <div>
-            <span className="title">{entry.title}</span>
+            <h3 className="title">{entry.title}</h3>
           </div>
           <div>
             <span className= "subtitle">{entry.description}</span>
@@ -133,6 +133,9 @@ module.exports = translate("translation")(pure(ResultList))
 const AddressWrapper = styled.div`
   font-size: 0.8em;
   color: ${STYLE.gray};
+  margin-top: .3rem;
+  margin-bottom: .4rem;
+
 `;
 
 const ListElement = styled.li `
@@ -152,11 +155,15 @@ const ListElement = styled.li `
       height: 1.2em;
     }
   }
+  h3 {
+    font-size: 1.2em;
+    margin: .2rem .3em .2rem 0;
+  }
   &.current-entry {
-    background: ${STYLE.white};
+    background: #fff;
   }
   &:hover {
-    background: ${STYLE.white};
+    background-color: #fff;
   }
   &.event {
     &.current-entry {
@@ -191,6 +198,9 @@ const ListElement = styled.li `
       color: ${STYLE.initiative};
     }
   }
+  h3.title{
+    font-weight: 500;
+  }
   span {
     &.category {
       font-size: 0.8em;
@@ -198,7 +208,7 @@ const ListElement = styled.li `
       text-transform: uppercase;
     }
     &.title {
-      font-weight: bold;
+      font-weight: 500;
       font-size: 1.2em;
       margin-right: 0.3em;
     }
@@ -208,6 +218,7 @@ const ListElement = styled.li `
     }
   }
   .highlight-entry {
+
     div.chevron {
       color: $darkGray;
     }
@@ -224,8 +235,7 @@ const ListElement = styled.li `
 `
 
 const TagsWrapper = styled.div `
-  margin-top: 0.1em;
-  float: right;
+  margin-top: 0.4em;
   ul {
     list-style: none;
     padding: 0;
@@ -234,16 +244,16 @@ const TagsWrapper = styled.div `
 `
 
 const Tag = styled.div `
+  font-size: 0.75em;
   display: inline-block;
-  margin-right: 0.2em;
-  background: #aaa;
-  color: #fff;
-  border-radius: 0.2em;
-  padding: 0.15em;
-  padding-left: 0.2em;
-  padding-right: 0.2em;
-  font-size: 0.8em;
+  background: #eaeaea;
+  color: #333;
+  border-radius: 0.3em;
+  padding: 0.2em 0.4em;
+  margin-right: 0.4em;
+  margin-bottom: 0.2em;
   border: 0;
+  letter-spacing: 0.06em;
 `
 
 const Wrapper = styled.div `
@@ -268,8 +278,8 @@ const Wrapper = styled.div `
   }
   .flower {
     float: right;
-    margin-top: -65px;
-    margin-right: 10px;
+    margin-top: 0.4em;
+    margin-right: 1.2rem;
   }
   ul {
     list-style: none;
