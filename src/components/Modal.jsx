@@ -34,7 +34,7 @@ module.exports = ({view, dispatch}) => {
             cancelButtonLabel = {t("locate.close")}
             onCancel = { () => dispatch(Actions.cancelOwnPosition()) }
             actionButtonLabel = {t("locate.tryAgain")}
-            actionButtonIcon = "repeat"
+            actionButtonIcon = "redo"
             onAction = { () => dispatch(Actions.showOwnPosition15minutes()) }
             />
         </div>

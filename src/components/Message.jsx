@@ -30,9 +30,7 @@ class Message extends React.Component {
     return (
       <div className = 'dialog'>
         <div className = "message">
-          <FontAwesomeIcon icon={ this.props.iconClass } /> { this.props.message }
-          {//TODO: Add pulse if icon = spinner: { (this.props.iconClass == 'spinner') ? 'pulse' : "" }  }
-          }
+          <FontAwesomeIcon icon={this.props.iconClass}  pulse= { (this.props.iconClass == 'spinner') ? true : false } /> { this.props.message }
         </div>
         <div className = "close-button">
           { cancelButton }
