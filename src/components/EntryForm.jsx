@@ -48,7 +48,6 @@ class Form extends Component {
     event.preventDefault()
     this.props.change('image_url', '');
     this.state.uploadedFileUrl = '';
-    this.props.imageUrl = '';
   } 
 
   handleImageUpload(file) {
