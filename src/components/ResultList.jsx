@@ -278,8 +278,8 @@ const Wrapper = styled.div `
   }
   .flower {
     float: right;
-    margin-top: 0.4em;
-    margin-right: 1.2rem;
+    margin-top: -1.2em;
+    margin-right: -0.5rem;
   }
   ul {
     list-style: none;
