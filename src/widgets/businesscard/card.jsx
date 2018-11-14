@@ -1,3 +1,5 @@
+import "../../components/styling/Icons"
+
 import React, { Component } from "react";
 import BusinessCard  from "../../components/BusinessCard";
 import URLs          from "../../constants/URLs";
