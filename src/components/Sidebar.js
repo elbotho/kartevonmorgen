@@ -118,7 +118,6 @@ class Sidebar extends Component {
         content = (
           <div className="content-above-buttons">
             <EntryForm
-              ref={ form }
               isEdit={ form[EDIT.id] ? form[EDIT.id].kvm_flag_id : null}
               imageUrl={ entries[search.current].image_url }
               license={ entries[search.current] ? entries[search.current].license : null}
@@ -160,8 +159,8 @@ class Sidebar extends Component {
               entryid={ kvm_flag_id }
               entryTitle={
                 form[RATING.id]
-                  ? ref = entries[form[RATING.id].kvm_flag_id]
-                    ? ref.title
+                  ? entries[form[RATING.id].kvm_flag_id]
+                    ? entries[form[RATING.id].kvm_flag_id].title
                     : null
                   : null
               }
@@ -188,8 +187,7 @@ class Sidebar extends Component {
           <div className={ "content-above-buttons" }>
             <Message
               iconClass={ "spinner" }
-              message={ " lade Daten vom Server ..." }
-              buttonLabel={ t("loading-entries.cancel") }
+              message={ t("loading-message") }
               onCancel={ () => { return dispatch(Actions.cancelWait()); }}
             />
           </div>

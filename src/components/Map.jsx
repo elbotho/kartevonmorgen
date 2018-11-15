@@ -52,12 +52,6 @@ class KVMMap extends Component {
     }
   }
 
-  componentDidUpdate(prevProps, prevState){
-    if (prevProps.size != this.props.size) {
-      this.refs.map.leafletElement.invalidateSize()
-    }
-  }
-
   getMapCoordinates(){
     const m = this.refs.map.leafletElement
     return {
@@ -186,7 +180,7 @@ class KVMMap extends Component {
                   className   = "leaflet-bar-part leaflet-bar-part-single" //"locate-icon"
                   onClick     = { this.props.onLocate }
                   title       = "Zeige meine Position" >
-                  <FontAwesomeIcon icon="location-arrow" />
+                  <LocateIcon icon="location-arrow" />
                 </LocateButton>
               </LocateButtonInnerContainer>
             </LocateButtonContainer>
@@ -253,6 +247,11 @@ const LocateButton = styled.a `
   width: 30px !important;
   height: 30px !important;
   line-height: 30px !important;
+`;
+
+const LocateIcon = styled(FontAwesomeIcon)`
+  width: 12px;
+  height: 12px;
 `;
 
 const SmallTooltip = styled(Tooltip)`

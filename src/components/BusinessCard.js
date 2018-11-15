@@ -1,17 +1,17 @@
-import React, { Component }   from "react";
-import styled                 from "styled-components";
-import STYLE                 from "./styling/Variables"
-import { translate }          from "react-i18next";
-import { pure }               from "recompose";
-import AddressLine                from "./AddressLine";
-import T                      from "prop-types";
-import Actions                from "../Actions";
+import React, { Component } from "react";
+import styled from "styled-components";
+import STYLE from "./styling/Variables"
+import { translate } from "react-i18next";
+import { pure } from "recompose";
+import AddressLine from "./AddressLine";
+import T from "prop-types";
+import Actions from "../Actions";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { ROUTEPLANNER }         from "../constants/URLs.js"
+import { ROUTEPLANNER } from "../constants/URLs.js"
 
 
 const Tags = (tags=[], dispatch) =>
-  <TagsWrapper>
+  <TagsWrapper key="tags">
     <TagList>
     { tags
         .filter(t => t != "")
@@ -59,14 +59,14 @@ class BusinessCard extends Component {
           <EntryDetailsOtherData>{[
             (entry.homepage ?
               <div key="hp">
-                <FontAwesomeIcon icon="globe-africa" />&nbsp;
+                <FontAwesomeIconElement icon="globe-africa" />
                 <EntryLink href={entry.homepage} target="_blank">
                   { shortHomepage }
                 </EntryLink>
               </div> : null),
             (entry.email ?
               <div key="mail">
-                <FontAwesomeIcon icon="envelope" />&nbsp;
+                <FontAwesomeIconElement icon="envelope" />
                 <EntryLink href={ "mailto:" + entry.email}>
                   {entry.email}
                 </EntryLink>
@@ -75,24 +75,21 @@ class BusinessCard extends Component {
             (entry.telephone
               ?
               <div key="tel">
-                <FontAwesomeIcon icon="phone" />&nbsp;{ entry.telephone }
+                <FontAwesomeIconElement icon="phone" />{ entry.telephone }
               </div>
               : null),
             ((entry.street || entry.zip || entry.city) ?
-              <div>
+              <div key="addr">
                 <div key="addr" className="address pure-g">
-                  <FontAwesomeIcon className="pure-u-2-24" icon="map-marker-alt" />
-                  <div className="pure-u-22-24">
-                    <AddressLine 
-                    { ...entry }
-                    className = "icon"
-                    />
-                  </div>
+                  <FontAwesomeIconElement className="pure-u-2-24" icon="map-marker-alt" />
+                  <AddressWrapper className="pure-u-22-24">
+                    <AddressLine { ...entry } />
+                  </AddressWrapper>
                 </div>
                 <div key="route">
-                  <FontAwesomeIcon icon="route" />&nbsp;
+                  <FontAwesomeIconElement icon="route" />
                   <EntryLink title={ "Hinfinden mit "+ROUTEPLANNER.name } href={routeUrl} target="_blank">Routenplaner</EntryLink>
-              </div></div>
+                </div></div>
               : null),
             (entry.tags && entry.tags.filter(t => t !="").length > 0
               ? Tags(entry.tags, dispatch)
@@ -110,6 +107,13 @@ BusinessCard.propTypes = {
 module.exports = translate('translation')(pure(BusinessCard))
 
 
+const FontAwesomeIconElement = styled(FontAwesomeIcon)`
+  margin-right: 12px;
+`;
+
+const AddressWrapper = styled.div`
+  margin-left: -4px;
+`;
 
 const EntryDetailPage = styled.div`
   z-index: 2;
