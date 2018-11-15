@@ -12,8 +12,8 @@ const config = {
   mode: "development",
   entry: {
     app: ['babel-polyfill', path.join(__dirname, "src/index.js")],
-    businesscard_widget: ['babel-polyfill', path.join(__dirname, "src/widgets/businesscard/index.js")],
-    map_widget: ['babel-polyfill', path.join(__dirname, "src/widgets/map/index.js")]
+    // businesscard_widget: ['babel-polyfill', path.join(__dirname, "src/widgets/businesscard/index.js")],
+    // map_widget: ['babel-polyfill', path.join(__dirname, "src/widgets/map/index.js")]
   },
   output: {
     path: path.join(__dirname, 'dist/'),

@@ -73,7 +73,7 @@ class Main extends Component {
         <MainWrapper className="main">
           <NotificationsSystem theme={theme}/>
           { 
-            view.menu ? 
+            (true===false && view.menu) ? 
               <LandingPage
                 onMenuItemClick={ id => {
                   switch (id) {
@@ -198,7 +198,7 @@ class Main extends Component {
             </button>
           </HiddenSidebar>   
           
-          <RightPanel>
+          {/* <RightPanel>
             <div className="menu-toggle">
               <button onClick={()=>{ return dispatch(Actions.toggleMenu()); }} >
                 <span className="pincloud">
@@ -206,7 +206,7 @@ class Main extends Component {
                 </span>
               </button>
             </div>
-          </RightPanel> 
+          </RightPanel>  */}
 
           <div className="center">
             <Map
@@ -228,6 +228,7 @@ class Main extends Component {
               onZoomend={ coordinates => { return dispatch(Actions.onZoomend(coordinates, map.zoom)); }}
               onLocate={ () => { return dispatch(Actions.showOwnPosition()); }}
               showLocateButton={ true }
+              dispatch = { dispatch }
             />
           </div>
         </MainWrapper>

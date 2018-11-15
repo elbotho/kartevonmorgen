@@ -24,6 +24,8 @@ const getLicenseForEntry = currentLicense => {
   }
 };
 
+var searchTimer = 0
+
 const Actions = {
 
   search: () =>
@@ -81,19 +83,20 @@ const Actions = {
             }
           });
 
-          if (search.text != null) {
-            const address = search.text.replace(/#/g, "");
-            WebAPI.searchAddressTilehosting(address, (err, res) => {
-              dispatch({
-                type: T.SEARCH_ADDRESS_RESULT,
-                payload: err || res.results,
-                error: err != null
-              });
-            });
-          }
+          // if (search.text != null) {
+          //   const address = search.text.replace(/#/g, "");
+          //   WebAPI.searchAddressTilehosting(address, (err, res) => {
+          //     dispatch({
+          //       type: T.SEARCH_ADDRESS_RESULT,
+          //       payload: err || res.results,
+          //       error: err != null
+          //     });
+          //   });
+          // }
         }
       };
 
+      clearTimeout(searchTimer)
       const triggerSearch = () => {
 
         const { timedActions } = getState();
@@ -104,12 +107,12 @@ const Actions = {
           if (duration > appConst.SEARCH_DELAY) {
             searchFn();
           } else {
-            setTimeout(triggerSearch, appConst.SEARCH_DELAY);
+            searchTimer = setTimeout(triggerSearch, appConst.SEARCH_DELAY);
           }
         }
       };
 
-      setTimeout(triggerSearch, appConst.SEARCH_DELAY+5);
+      searchTimer = setTimeout(triggerSearch, appConst.SEARCH_DELAY+5);
 
     },
 

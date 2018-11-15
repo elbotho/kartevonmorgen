@@ -18,6 +18,14 @@ import styled               from "styled-components";
 
 class Sidebar extends Component {
 
+  shouldComponentUpdate(nextProps) {
+
+    return (
+      Object.keys(nextProps.resultEntries).join() !== Object.keys(this.props.resultEntries).join() ||
+      nextProps.view.left !== this.props.view.left
+    )
+  }
+
   entryContent = null;
 
   setEntryContentRef = (elem) => {
@@ -34,6 +42,7 @@ class Sidebar extends Component {
     const { waiting_for_search_results } = view;
     const { explainRatingContext, selectedContext } = view;
     const invisibleEntries = search.invisible.filter(e => entries[e.id]).map(e => entries[e.id]);
+
 
     var content;
     switch (view.left) {
@@ -69,7 +78,7 @@ class Sidebar extends Component {
                 : ""
             }
             {
-              (invisibleEntries && invisibleEntries.length) ?
+              (true===false && invisibleEntries && invisibleEntries.length) ?
                 <div>
                   <GroupHeader>
                     { t("search-results.results-out-of-bbox") }

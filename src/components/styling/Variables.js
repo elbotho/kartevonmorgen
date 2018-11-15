@@ -9,6 +9,7 @@ const anthracite = "rgb(45,   45,   45)";
 const darkGray   = "rgb(102,  102,  102)";
 const gray       = "rgb(136,  136,  136)";
 const lightGray  = "rgb(221,  221,  221)";
+const someRed    = "#c66666";
 
 const rating_contexts = {
   "diversity": green,      // GREEN
@@ -37,9 +38,9 @@ module.exports = {
   gray:       gray,
   darkGray:   darkGray,
 
-  company:    blue,
-  initiative: green,
-  event:      pink,
+  company:    someRed,
+  initiative: someRed,
+  event:      someRed,
   otherCategory: lightGray,
 
   rating_contexts: rating_contexts,

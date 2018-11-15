@@ -13,7 +13,7 @@ import STYLE        from "./styling/Variables"
 import styled       from "styled-components";
 
 
-const ResultListElement = ({highlight, entry, ratings, onClick, onMouseEnter, onMouseLeave, t}) => {
+const _ResultListElement = ({highlight, entry, ratings, onClick, onMouseEnter, onMouseLeave, t}) => {
   var css_class = highlight ? 'highlight-entry ' : '';
   css_class = css_class + NAMES[entry.categories && entry.categories[0]];
 
@@ -61,6 +61,8 @@ const ResultListElement = ({highlight, entry, ratings, onClick, onMouseEnter, on
       </div>
     </ListElement>)
 }
+
+const ResultListElement = pure(_ResultListElement)
 
 const ResultList = ({ dispatch, waiting, entries, ratings, highlight, onClick,
   moreEntriesAvailable, onMoreEntriesClick, t}) => {

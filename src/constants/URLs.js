@@ -37,7 +37,10 @@ module.exports = {
     link: "https://osm.org/copyright"
   },
   TILE_SERVER: {
-    link: "https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}{r}.png"
+    // link: "https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}{r}.png"
+    //link: "https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.png"    
+    link: "https://api.mapbox.com/styles/v1/elbotho/cjohc02lm7ou12rmyv9642298/tiles/{z}/{x}/{y}{r}?access_token=pk.eyJ1IjoiZWxib3RobyIsImEiOiJIaEhEQmF3In0.Zvu3ssdfbu6y5VRlCTrL9Q"
+
   },
   TILE_SERVER_ATTR: {
     name: "Wikimedia",
