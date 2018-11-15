@@ -9,7 +9,7 @@ const production = process.env.NODE_ENV
 const is_prototype = process.env.KVM_PROTOTYPE === "true"
 
 const config = {
-  mode: "development",
+  mode: "production",
   entry: {
     app: ['babel-polyfill', path.join(__dirname, "src/index.js")],
     // businesscard_widget: ['babel-polyfill', path.join(__dirname, "src/widgets/businesscard/index.js")],
@@ -94,9 +94,9 @@ const config = {
         loader: "url-loader?limit=10000&mimetype=image/svg+xml"
       }
     ],
-    noParse: [
-      /\.min\.js$/,
-    ]
+    // noParse: [
+    //   /\.min\.js$/,
+    // ]
   },
   resolve: {
     extensions: [".jsx", ".js"]

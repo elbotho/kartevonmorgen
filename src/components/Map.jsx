@@ -25,8 +25,6 @@ URLs.TILE_SERVER_ATTR.name ? attribution = '<a class="osm attr" href=' + URLs.TI
 attribution += '&copy; <a class="osm attr" href=' + URLs.OSM_ATTR.link + '>' + URLs.OSM_ATTR.name + '</a>'
 
 
-var searchTimer = 0;
-
 class KVMMap extends Component {
 
   
@@ -59,21 +57,10 @@ class KVMMap extends Component {
 
   _onMoveend () {
     this.props.onMoveend(this.getMapCoordinates()) 
-    clearTimeout(searchTimer);
-    // searchTimer = setTimeout(()=>{
-    //   console.log("!!!! _onMoveend !!!! ")
-    //   this.props.onMoveend(this.getMapCoordinates()) 
-    // },400)
   }
 
   _onZoomend () {
     this.props.onZoomend(this.getMapCoordinates()) 
-    
-    clearTimeout(searchTimer);
-    // searchTimer = setTimeout(()=>{
-    //   console.log("!!!! _onZoomend !!!! ")
-    //   this.props.onZoomend(this.getMapCoordinates()) 
-    // },400)
   }
 
 
@@ -185,13 +172,10 @@ class MarkerLayer extends PureComponent {
     return new L.Icon({
       iconUrl: require('../img/marker.svg'),
       iconRetinaUrl: require('../img/marker.svg'),
-      iconSize: [size, size]
-      // ??? iconAnchor: [helper, size],
-      // popupAnchor: [0, 100]
+      iconSize: [size, size],
+      iconAnchor: [helper, size - size/6]
     });
   }
-
-
 
   render() {
 
