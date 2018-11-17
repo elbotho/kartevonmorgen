@@ -34,8 +34,8 @@ class Sidebar extends Component {
 
   scrollToTop = () =>{
     if(this.entryContent) {
-      this.entryContent.scrollTop(0)
-      this.entryContent.scrollLeft(0)
+      this.entryContent.scrollTop = 0
+      this.entryContent.scrollLeft = 0
     }
   }
 
