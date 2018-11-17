@@ -63,9 +63,11 @@ class SelectTags extends Component {
 
   valueToArray() {
     const value = this.props.input.value
-
+    
     if( typeof value !== "string") return value
-    return value.split(',').map( val => {
+    if( value.length === 0 ) return null
+
+    return value.split(',').map( val => {      
       return {value: val, label: val }
     })
   }
@@ -111,11 +113,9 @@ class SelectTags extends Component {
 
         onInputChange={this.onInputChange.bind(this)}
         onChange={ (value,event) => {this.valueToString( this.props.input.onChange, value, event ) } }
-        onBlur={() => this.props.input.onBlur([this.props.input.value]) }
-        onBlur={() => this.props.input.onBlur(this.props.input.value) }
+        onBlur={event => event.preventDefault()}
         value={ this.valueToArray() }
         isValidNewOption = { this.validate }
-        // getNewOptionDatafunction = {this.getNewOptionData}
       />
     )
   }
