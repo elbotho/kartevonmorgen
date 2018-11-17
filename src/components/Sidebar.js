@@ -33,7 +33,10 @@ class Sidebar extends Component {
   };
 
   scrollToTop = () =>{
-    if(this.entryContent) this.entryContent.scrollTo(0,0)
+    if(this.entryContent) {
+      this.entryContent.scrollTop(0)
+      this.entryContent.scrollLeft(0)
+    }
   }
 
   render(){
