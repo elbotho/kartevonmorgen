@@ -47,6 +47,7 @@ class Main extends Component {
 
   componentDidMount(){
     document.addEventListener("keydown", (e) => this.escFunction(e), false);
+    this.props.dispatch(Actions.showLeftPanel())
   }
 
   componentWillUnmount(){
