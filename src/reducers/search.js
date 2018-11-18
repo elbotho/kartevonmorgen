@@ -21,7 +21,7 @@ const initialState = {
 const unique = cities =>
   cities
     .map(
-      ({city, name, state, country, lat, lon, osm_id, wikipedia}) =>
+      ({city, name, state, country, lat, lon, osm_id, wikipedia, place_rank}) =>
         ({
           city: (city || name),
           state,
@@ -29,7 +29,8 @@ const unique = cities =>
           lat,
           lon,
           osm_id,
-          wikipedia
+          wikipedia,
+          place_rank
         }))
     .filter((item, pos, self) => 
       self.findIndex(x => (
