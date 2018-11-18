@@ -43,8 +43,7 @@ const config = {
         include: [
           path.resolve(__dirname, "src"),
           path.resolve(__dirname, "spec"),
-          path.resolve(__dirname, "node_modules/flash-notification-react-redux"),
-          path.resolve(__dirname, "node_modules/vm-leaflet-icons")
+          path.resolve(__dirname, "node_modules/flash-notification-react-redux")
         ],
       },
       {
