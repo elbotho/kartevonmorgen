@@ -1,12 +1,14 @@
-import React, { PureComponent } from "react"
+import React, { Component, PureComponent } from "react"
 import { Marker, Tooltip, CircleMarker } from "react-leaflet"
 import STYLE from "../styling/Variables"
 import styled from "styled-components";
-import { IDS } from  "../../constants/Categories"
-const { INITIATIVE, EVENT, COMPANY } = IDS;
 import { avg_rating_for_entry } from "../../rating"
 import L from 'leaflet'
+import { translate } from "react-i18next"
 
+import { IDS } from  "../../constants/Categories"
+const { INITIATIVE, EVENT, COMPANY } = IDS;
+import { NAMES }    from "../../constants/Categories"
 
 const ICONSVG = 'data:image/svg+xml;utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 80"><radialGradient id="a" cx="-411.46" cy="370.93" r="28" gradientTransform="matrix(-2.0733 -.00485 -.00563 2.4046 -823.24 -872.86)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="{stop0}"/><stop offset="1" stop-color="{stop1}"/></radialGradient><path d="M28 80S0 42.8 0 28 13.2 0 28 0s28 13.2 28 28-28 52-28 52z" fill="url(%23a)"/></svg>'
 const ICONS = []
@@ -62,6 +64,8 @@ class MarkerLayer extends PureComponent {
 
     if (entries && entries.length > 0 ) {
       entries.forEach(e => {
+
+        let isHighlight = highlight.length > 0 && highlight.indexOf(e.id) == 0
         let avg_rating = null;
 
         if(e.ratings.length > 0 && Object.keys(ratings).length > 0){
@@ -80,7 +84,7 @@ class MarkerLayer extends PureComponent {
               icon      = { this.getIcon(markerSize, e.categories[0]) }
               opacity   = { opacity }
             >
-              <SmallTooltip direction='bottom' offset={[0, 2]}><h3>{e.title}</h3></SmallTooltip>
+              { !isHighlight && <LongTooltip entry={ e } /> }
             </Marker>
           );
         } else {
@@ -103,12 +107,13 @@ class MarkerLayer extends PureComponent {
               fillColor = { this.getCategoryColorById(e.categories[0]) }
               fillOpacity = { opacity }
             >
-              <SmallTooltip direction='bottom' offset={[0, 10]}><h3>{e.title}</h3></SmallTooltip>
+              { !isHighlight && <LongTooltip entry={ e } /> } 
             </CircleMarker>
           );
         }
 
-        if(highlight.length > 0 && highlight.indexOf(e.id) == 0){
+        if(isHighlight){
+          
 
           let yOffset = 10
           if(e.ratings.length > 0 && avg_rating && avg_rating > 0) yOffset = 2
@@ -129,7 +134,7 @@ class MarkerLayer extends PureComponent {
 
     if (marker) {
       markersArray.push(
-        <Marker position = { marker } icon = { this.getIcon(markerSize) } />
+        <Marker position = { marker } icon = { this.getIcon(40) } />
       )
     }
     return (
@@ -141,11 +146,44 @@ class MarkerLayer extends PureComponent {
 
 module.exports = MarkerLayer 
 
+class _LongTooltip extends PureComponent {
+  render() {
+    const { entry, t } = this.props
+    const maxLength = 100
+    const desc = (entry.description.length < maxLength) ? entry.description : entry.description.substr(0,maxLength) + ' …'
+     
+    return(
+      <SmallTooltip long={true} direction='bottom' offset={[0, 10]}>
+        <React.Fragment>
+          <span>{t("category." + NAMES[entry.categories && entry.categories[0]])}</span>
+          <h3>{entry.title}</h3>
+          <p>{desc}</p>
+        </React.Fragment>
+      </SmallTooltip>            
+    )
+  }
+}
+
+const LongTooltip = translate('translation')(_LongTooltip)
+
+
 const SmallTooltip = styled(Tooltip)`
+
+  ${props => props.long && `
+    min-width: 10.5rem;
+    white-space: normal !important;
+  `}
+
+  > span {
+    color: ${ STYLE.initiative };
+    font-size: 0.77rem;
+    text-transform: uppercase;
+  }
+
   > h3 {
     font-family: sans-serif;
     margin: 0;
     padding: 0;
-    font-size: 0.75rem;
+    font-size: 0.85rem;
   }
 `
