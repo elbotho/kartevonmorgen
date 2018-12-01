@@ -48,6 +48,7 @@ class Main extends Component {
   componentDidMount(){
     document.addEventListener("keydown", (e) => this.escFunction(e), false);
     this.props.dispatch(Actions.showStart());
+    this.props.dispatch(Actions.getAllTags())
   }
 
   componentWillUnmount(){
@@ -140,51 +141,61 @@ class Main extends Component {
             view.modal != null ? <Modal view={view} dispatch={dispatch} /> : ""
           }
 
-          <LeftPanel className={"left " + (view.showLeftPanel && !view.menu ? 'opened' : 'closed')}>
-            <div className={"search " + ((view.left === V.RESULT || view.left === V.START) ? 'open' : 'closed')}>
-              <SearchBar
-                searchText={search.text}
-                categories={search.categories}
-                type="integrated"
-                disabled={view.left === V.EDIT || view.left === V.NEW}
-                toggleCat={ c => {
-                  if (c === C.IDS.EVENT) {
-                    return dispatch(Actions.showFeatureToDonate("events"));
-                  } else {
-                    dispatch(Actions.toggleSearchCategory(c));
+          <Swipeable onSwipedLeft={ () => this.swipedLeftOnPanel() }>
+            <LeftPanel className={"left " + (view.showLeftPanel && !view.menu ? 'opened' : 'closed')}>
+              <div className={"search " + ((view.left === V.RESULT || view.left === V.START) ? 'open' : 'closed')}>
+                <SearchBar
+                  tags={search.tags}
+                  searchText={search.text}
+                  categories={search.categories}
+                  type="integrated"
+                  disabled={view.left === V.EDIT || view.left === V.NEW}
+                  toggleCat={ c => {
+                    if (c === C.IDS.EVENT) {
+                      return dispatch(Actions.showFeatureToDonate("events"));
+                    } else {
+                      dispatch(Actions.toggleSearchCategory(c));
+                      return dispatch(Actions.search());
+                    }
+                  }}
+                  onChange={txt => {
+                    if (txt == null) { txt = "" }
+                    dispatch(Actions.setSearchText(txt));
                     return dispatch(Actions.search());
-                  }
-                }}
-                onChange={txt => {
-                  if (txt == null) {
-                    txt = "";
-                  }
-                  dispatch(Actions.setSearchText(txt));
-                  return dispatch(Actions.search());
-                }}
-                onEscape={ () => {
-                  return dispatch(Actions.setSearchText(''));
-                }}
-                onEnter={ () => {}}      // currently not used, TODO
-              />
-            </div>
+                  }}
+                  onPlaceSearch={txt => {
+                    dispatch(Actions.setSearchText(''));
+                    dispatch(Actions.showResultList());
+                    dispatch(Actions.setCitySearchText(txt));
+                    if (txt && txt.length > 3) {
+                      return dispatch(Actions.searchCity());
+                    }
+                  }}
+                  onEscape={ () => {
+                    return dispatch(Actions.setSearchText(''));
+                  }}
+                  onEnter={ () => {}}      // currently not used, TODO
+                  loading={ server.loadingSearch }
+                />
+              </div>
 
-            <div className="content-wrapper">
-              <Sidebar
-                view={ view }
-                search={ search }
-                map={ map }
-                user={ user }
-                form={ form }
-                entries={entries}
-                resultEntries={ resultEntries }
-                ratings={ ratings }
-                LeftPanelentries={ server.entries }
-                dispatch={ dispatch }
-                t={ t }
-              />
-            </div>
-          </LeftPanel>
+              <div className="content-wrapper">
+                <Sidebar
+                  view={ view }
+                  search={ search }
+                  map={ map }
+                  user={ user }
+                  form={ form }
+                  entries={entries}
+                  resultEntries={ resultEntries }
+                  ratings={ ratings }
+                  // LeftPanelentries={ server.entries } never used…?
+                  dispatch={ dispatch }
+                  t={ t }
+                />
+              </div>
+            </LeftPanel>
+          </Swipeable>
 
           <HiddenSidebar>
             <button

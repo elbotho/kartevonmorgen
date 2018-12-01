@@ -244,7 +244,10 @@ const Description = styled.div`
 `;
 
 const TagsWrapper = styled.div `
+  position: relative;
+  z-index: 3;
   margin-top: 0.4em;
+  float: left;
   ul {
     list-style: none;
     padding: 0;
