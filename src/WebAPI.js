@@ -187,6 +187,14 @@ module.exports = {
       .end(cb);
   },
 
+  getAllTags: (cb) => {
+    request
+      .get('/tags')
+      .use(prefix)
+      .set('Accept', 'application/json')
+      .end(cb)
+  },
+
   getServerInfo: (cb) => {
     request
       .get('/server/version')

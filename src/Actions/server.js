@@ -81,16 +81,16 @@ const Actions = {
             }
           });
 
-          if (search.text != null) {
-            const address = search.text.replace(/#/g, "");
-            WebAPI.searchAddressTilehosting(address, (err, res) => {
-              dispatch({
-                type: T.SEARCH_ADDRESS_RESULT,
-                payload: err || res.results,
-                error: err != null
-              });
-            });
-          }
+          // if (search.text != null) {
+          //   const address = search.text.replace(/#/g, "");
+          //   WebAPI.searchAddressTilehosting(address, (err, res) => {
+          //     dispatch({
+          //       type: T.SEARCH_ADDRESS_RESULT,
+          //       payload: err || res.results,
+          //       error: err != null
+          //     });
+          //   });
+          // }
         }
       };
 
@@ -188,7 +188,30 @@ const Actions = {
         });
       });
     },
-
+    
+  getAllTags: () =>
+    (dispatch) => {
+      WebAPI.getAllTags((err,res) => {
+        if (err) {
+          console.error(err);
+        }
+        if (res.body) {
+          let options = []
+          for (var i = 0; i < res.body.length; i++) {
+            options[i] = {
+              "value": res.body[i],
+              "label": res.body[i],
+              "type": "tag"
+            }
+          } 
+          dispatch({
+            type: T.TAGS_RESULT,
+            payload: err || options,
+            error: err != null
+          });
+        }
+      });
+    },
   getServerInfo: () =>
     (dispatch) => {
       WebAPI.getServerInfo((err, res) => {

@@ -15,7 +15,8 @@ const initialState = {
   cities: [],
   searchByUrl: true,
   showingAllEntries: false,
-  moreEntriesAvailable: false
+  moreEntriesAvailable: false,
+  tags: []
 };
 
 const unique = cities =>
@@ -102,7 +103,8 @@ module.exports = (state = initialState, action = {}) => {
         return {
           ...state,
           result: action.payload.visible,
-          invisible: action.payload.invisible
+          invisible: action.payload.invisible,
+          cities: []
         }
       }
       return state;
@@ -113,6 +115,8 @@ module.exports = (state = initialState, action = {}) => {
         const d = action.payload || [];
         return {
           ...state,
+          result: [],
+          invisible:  [],
           addresses: d,
           cities: unique(d.filter(isCity)),
           error: false
@@ -120,6 +124,8 @@ module.exports = (state = initialState, action = {}) => {
       } else {
         return {
           ...state,
+          result: [],
+          invisible:  [],
           addresses: [],
           cities: [],
           error: true
@@ -157,6 +163,12 @@ module.exports = (state = initialState, action = {}) => {
       return {
         ...state,
         highlight: action.payload
+      }
+    
+    case T.TAGS_RESULT:
+      return {
+        ...state,
+        tags: action.payload
       }
 
     case T.SET_MORE_ENTRIES_AVAILABLE:
