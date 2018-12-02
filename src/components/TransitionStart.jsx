@@ -14,7 +14,7 @@ class TransitionStart extends Component {
         <div className="entry">
 
           <EntryDetailPage>
-            <header style={{textAlign:"center"}} >
+            <header style={{textAlign:"center",color:"#c66666"}} >
               <img src="https://transition-muc.de/wp-content/uploads/2018/05/map@2x-150x150.png" />
               <h1>Transition Map Prototyp</h1>
             </header>

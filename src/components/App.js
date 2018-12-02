@@ -46,8 +46,8 @@ class Main extends Component {
   }
 
   componentDidMount(){
-    document.addEventListener("keydown", (e) => this.escFunction(e), false);
-    this.props.dispatch(Actions.showStart());
+    document.addEventListener("keydown", (e) => this.escFunction(e), false)
+    this.props.dispatch(Actions.showStart())
     this.props.dispatch(Actions.getAllTags())
   }
 
@@ -141,7 +141,7 @@ class Main extends Component {
             view.modal != null ? <Modal view={view} dispatch={dispatch} /> : ""
           }
 
-          <Swipeable onSwipedLeft={ () => this.swipedLeftOnPanel() }>
+          {/* <Swipeable onSwipedLeft={ () => this.swipedLeftOnPanel() }> */}
             <LeftPanel className={"left " + (view.showLeftPanel && !view.menu ? 'opened' : 'closed')}>
               <div className={"search " + ((view.left === V.RESULT || view.left === V.START) ? 'open' : 'closed')}>
                 <SearchBar
@@ -161,6 +161,7 @@ class Main extends Component {
                   onChange={txt => {
                     if (txt == null) { txt = "" }
                     dispatch(Actions.setSearchText(txt));
+                    dispatch(Actions.showSearchResults());
                     return dispatch(Actions.search());
                   }}
                   onPlaceSearch={txt => {
@@ -195,7 +196,7 @@ class Main extends Component {
                 />
               </div>
             </LeftPanel>
-          </Swipeable>
+          {/* </Swipeable> */}
 
           <HiddenSidebar>
             <button
@@ -212,7 +213,10 @@ class Main extends Component {
           
           <RightPanel>
             <div className="menu-toggle">
-              <button onClick={()=>{ return dispatch(Actions.showStart()); }} >
+              <button onClick={()=>{ 
+                dispatch(Actions.setSearchText(''));
+                return dispatch(Actions.showStart());
+                }} >
                 <span>
                   <MenuFontAwesomeIcon icon={'bars'} />
                 </span>

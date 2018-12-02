@@ -20,13 +20,14 @@ import EntryImage from "./EntryImage";
 
 class Sidebar extends Component {
 
-  // shouldComponentUpdate(nextProps) {
-  //   return (
-  //     Object.keys(nextProps.resultEntries).join() !== Object.keys(this.props.resultEntries).join() ||
-  //     nextProps.view.left !== this.props.view.left ||
-  //     nextProps.search.current !== this.props.search.current
-  //   )
-  // }
+  shouldComponentUpdate(nextProps) {
+    console.log(nextProps.view.left);
+    return (
+      Object.keys(nextProps.resultEntries).join() !== Object.keys(this.props.resultEntries).join() ||
+      nextProps.view.left !== this.props.view.left ||
+      nextProps.search.current !== this.props.search.current
+    )
+  }
 
   componentDidMount(){
     

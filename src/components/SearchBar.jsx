@@ -127,12 +127,26 @@ module.exports = translate('translation')(pure(SearchBar))
 
 const borderRadius = '0.4em'
 
+const MagnifyingGlassIcon = styled(FontAwesomeIcon)`
+  margin: 0.1em 0 0 0.1em;
+  animation-duration: 150ms;
+  animation-name: turn;
+  @keyframes turn {
+    from {
+      transform: rotate(330deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+`
+
 
 const MainCategories = styled.div `
     
   font-size: 0.8em;
   color: ${STYLE.darkGray};
-
+  
   button {
     padding: 0.5em;
     text-transform: uppercase;
@@ -234,8 +248,6 @@ const Bar = styled.div `
 
   .search-icon{
     display: inline-block;
-    padding-top: .9em;
-    left: .75em;
     font-size: 1.2rem;
     
   }
