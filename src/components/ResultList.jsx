@@ -161,12 +161,13 @@ const ListElement = styled.li `
     font-size: 1.2em;
     margin: .2rem .3em .2rem 0;
   }
-  &.current-entry {
-    background: #fff;
+  
+  background-color: #fff;
+
+  &.current-entry, &:hover {
+    background-color: #fafafa;
   }
-  &:hover {
-    background-color: #fff;
-  }
+  
   &.event {
     &.current-entry {
       border-left: 5px solid ${STYLE.event};

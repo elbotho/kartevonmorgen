@@ -47,7 +47,7 @@ class Main extends Component {
 
   componentDidMount(){
     document.addEventListener("keydown", (e) => this.escFunction(e), false);
-    this.props.dispatch(Actions.showLeftPanel())
+    this.props.dispatch(Actions.showStart());
   }
 
   componentWillUnmount(){
@@ -141,7 +141,7 @@ class Main extends Component {
           }
 
           <LeftPanel className={"left " + (view.showLeftPanel && !view.menu ? 'opened' : 'closed')}>
-            <div className={"search " + ((view.left === V.RESULT) ? 'open' : 'closed')}>
+            <div className={"search " + ((view.left === V.RESULT || view.left === V.START) ? 'open' : 'closed')}>
               <SearchBar
                 searchText={search.text}
                 categories={search.categories}
@@ -199,15 +199,15 @@ class Main extends Component {
             </button>
           </HiddenSidebar>   
           
-          {/* <RightPanel>
+          <RightPanel>
             <div className="menu-toggle">
-              <button onClick={()=>{ return dispatch(Actions.toggleMenu()); }} >
-                <span className="pincloud">
+              <button onClick={()=>{ return dispatch(Actions.showStart()); }} >
+                <span>
                   <MenuFontAwesomeIcon icon={'bars'} />
                 </span>
               </button>
             </div>
-          </RightPanel>  */}
+          </RightPanel> 
 
           <div className="center">
             <Map
